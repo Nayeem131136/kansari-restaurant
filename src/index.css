@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ivory: #F8F7F2;
+  --color-ivory-light: #FCFBF7;
+  --color-ivory-dark: #ECEAE0;
+  --color-charcoal: #1C1B19;
+  --color-charcoal-light: #2A2926;
+  --color-charcoal-deep: #121110;
+  --color-gray-muted: #787570;
+  --color-gray-light: #A3A09A;
+  --color-terracotta: #8C3A27;
+  --color-terracotta-light: #A84832;
+  --color-terracotta-dark: #6E2D1E;
+  --color-gold-accent: #C5A059;
+
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-bengali: 'Noto Serif Bengali', 'Bangla Sangam MN', serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  body {
+    @apply bg-ivory text-charcoal font-sans;
+    overflow-x: hidden;
+    selection-background-color: var(--color-terracotta);
+    selection-color: var(--color-ivory);
+  }
+
+  ::selection {
+    background-color: #8C3A27;
+    color: #F8F7F2;
+  }
+
+  /* Custom Cursor Hide Native for fine pointer devices */
+  @media (pointer: fine) {
+    body.custom-cursor-active,
+    body.custom-cursor-active a,
+    body.custom-cursor-active button,
+    body.custom-cursor-active input,
+    body.custom-cursor-active select,
+    body.custom-cursor-active textarea {
+      cursor: none !important;
+    }
+  }
+
+  /* Typography Utilities */
+  .font-bengali {
+    font-family: var(--font-bengali);
+  }
+  
+  .font-serif {
+    font-family: var(--font-serif);
+  }
+
+  /* Custom subtle scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #F8F7F2;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #D5D2C7;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #8C3A27;
+  }
+}
+
