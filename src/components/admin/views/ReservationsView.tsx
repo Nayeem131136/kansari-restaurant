@@ -118,15 +118,28 @@ export function ReservationsView({ initialStatusFilter }: ReservationsViewProps)
           >
             <RefreshCw size={16} className={loading ? 'animate-spin' : ''} />
           </button>
-          <a
-            href={api.getExportCsvUrl()}
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            onClick={async () => {
+              try {
+                const csv = await api.exportReservationsCsv();
+                const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `kansari-reservations-${new Date().toISOString().split('T')[0]}.csv`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+              } catch (err) {
+                error('Failed to export CSV');
+              }
+            }}
             className="px-3.5 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-200 font-medium text-xs transition-colors flex items-center gap-2 cursor-pointer"
           >
             <Download size={15} />
             <span>Export CSV</span>
-          </a>
+          </button>
         </div>
       </div>
 
